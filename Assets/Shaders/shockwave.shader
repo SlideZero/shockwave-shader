@@ -68,7 +68,62 @@ Shader "Custom/Shockwave"
 			                smoothstep(_Size - _Thickness - 0.1, _Size - _Thickness, length(scaledUV - _Center));
 	            float2 disp = normalize(scaledUV - _Center) * _Force * mask;
 	            //COLOR = texture(SCREEN_TEXTURE, SCREEN_UV - disp);
-                fixed4 col = tex2D(_BackgroundTexture, i.uv - disp);
+                fixed4 col = float4(tex2D(_BackgroundTexture, i.uv + disp).r,
+                                    tex2D(_BackgroundTexture, i.uv).g,
+                                    tex2D(_BackgroundTexture, i.uv - disp).b, 1.0);
+                //fixed4 col = tex2D(_BackgroundTexture, i.uv - disp);
+                return col;
+            }
+            ENDCG
+        }
+
+        GrabPass
+        {
+            "_AberrationTexture"
+        }
+
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+
+            #include "UnityCG.cginc"
+
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+            };
+
+            struct v2f
+            {
+                float2 uv : TEXCOORD0;
+                float4 vertex : SV_POSITION;
+            };
+
+            float2 _Center;
+            float _Force;
+            float _Size;
+            float _Thickness;
+            sampler2D _AberrationTexture;
+
+            v2f vert (appdata v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = ComputeGrabScreenPos(o.vertex);
+                return o;
+            }
+
+            fixed4 frag (v2f i) : SV_Target
+            {
+                float ratio = _ScreenParams.y / _ScreenParams.x;
+	            float2 scaledUV = (i.uv - float2(0.5, 0.0)) / float2(ratio, 1.0) + float2(0.5, 0.0);
+	            float mask = (1.0 - smoothstep(_Size - 0.1, _Size, length(scaledUV - _Center))) *
+			                smoothstep(_Size - _Thickness - 0.1, _Size - _Thickness, length(scaledUV - _Center));
+	            float2 disp = normalize(scaledUV - _Center) * _Force * mask;
+                fixed4 col = tex2D(_AberrationTexture, i.uv - disp);
                 return col;
             }
             ENDCG

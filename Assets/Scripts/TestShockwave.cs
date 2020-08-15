@@ -5,6 +5,7 @@ using UnityEngine;
 public class TestShockwave : MonoBehaviour
 {
     public Material _shockwaveMaterial;
+    public CameraShake cameraShake;
     private float _shockwaveExpansion;
     private float _expansionSpeed;
     private float _size;
@@ -24,6 +25,7 @@ public class TestShockwave : MonoBehaviour
         _tempSize = _size;
         _size = 0;
         _instantiateShockwave = true;
+        cameraShake.startShaking = true;
     }
 
     private void StandardShockwave(){

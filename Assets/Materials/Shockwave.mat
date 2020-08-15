@@ -56,6 +56,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _Ab: 0
+    - _Aberration: 0
     - _BumpScale: 1
     - _Center: 0
     - _CenterX: 0
