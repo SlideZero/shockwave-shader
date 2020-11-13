@@ -19,6 +19,10 @@ public class TestShockwave : MonoBehaviour
     {
         StandardShockwave();
         ChangeShaderValues();
+        if(Input.GetKeyDown(KeyCode.T))
+            Time.timeScale = 0.2f;
+        else if(Input.GetKeyDown(KeyCode.Y))
+            Time.timeScale = 1f;
     }
 
     private void InstantiateShockwave(){
