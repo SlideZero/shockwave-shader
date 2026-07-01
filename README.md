@@ -7,10 +7,10 @@
 </p>
 
 <p align="center">
-<img src="https://img.shields.io/badge/Unity-2020.1.6-lightgrey"/> <img src="https://img.shields.io/badge/Template-Built--In-green"/> <img src="https://img.shields.io/badge/Feature-Shader_Lab-blue"/> <img src="https://img.shields.io/badge/Status-Production-brightgreen"/>
+  <img src="https://img.shields.io/badge/Unity-2020.1.6-lightgrey"/> <img src="https://img.shields.io/badge/Template-Built--In-green"/> <img src="https://img.shields.io/badge/Feature-Shader_Lab-blue"/> <img src="https://img.shields.io/badge/Status-Production-brightgreen"/>
 </p>
 
-<h2 align="center">Shockwave Shader</h2>
+# Shockwave Shader
 
 Shockwave shader effect for unity games and projects. This is a project made for the <em>Unity Built-In Render Pipeline</em>, if you want a solution for <em>URP (Universal Render Pipeline)</em> check this [project](https://github.com/SlideZero/urp-shockwave-shader).
 
